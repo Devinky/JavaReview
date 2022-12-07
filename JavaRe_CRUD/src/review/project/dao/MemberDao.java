@@ -1,18 +1,19 @@
-package dao1204;
+package review.project.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-import dbconnect1204.DBConnect;
+import review.project.dbconnect.DBConnect;
+import review.project.dto.MemberDto;
 
 public class MemberDao {
 	
-	//1. 회원가입
-	public int InsertDo(String userId, String userPw, String email, String userName) {
+	public int InsertDo(String userId, String userPw, String userName, String email) {
 		int result = 0;
-		
-		System.out.println("ID : " + userId + " | Password : " + userPw + " | email : " + email + " | Name : " + userName);
 		
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -20,13 +21,13 @@ public class MemberDao {
 		
 		try {
 			conn = DBConnect.getConnection();
-			query = "insert into usertable(userid, userpw, email, username) values(?,?,?,?)";
+			query = "insert into member01(userid, userpw, username, email) values(?,?,?,?)";
 			pstm = conn.prepareStatement(query);
 			
 			pstm.setString(1, userId);
 			pstm.setString(2, userPw);
-			pstm.setString(3, email);
-			pstm.setString(4, userName);
+			pstm.setString(3, userName);
+			pstm.setString(4, email);
 			
 			result = pstm.executeUpdate();
 		} catch (SQLException e) {
@@ -41,15 +42,9 @@ public class MemberDao {
 		}
 		return result;
 	}
-	
-	//2. 회원조회
-	
-	
-	//3. 회원수정
-	public int UpdateDo(String userId, String userPw, String email, String userName) {
+
+	public int UpdateDo(String userId, String userPw, String userName, String email) {
 		int result = 0;
-		
-		System.out.println("ID : " + userId + " | Password : " + userPw + " | email : " + email + " | Name : " + userName);
 		
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -57,12 +52,12 @@ public class MemberDao {
 		
 		try {
 			conn = DBConnect.getConnection();
-			query = "update usertable userPw=?, email=?, userName=? where userId=?";
+			query = "update member01 set userpw=?, username=?, email=? where userid=?";
 			pstm = conn.prepareStatement(query);
 			
 			pstm.setString(1, userPw);
-			pstm.setString(2, email);
-			pstm.setString(3, userName);
+			pstm.setString(2, userName);
+			pstm.setString(3, email);
 			pstm.setString(4, userId);
 			
 			result = pstm.executeUpdate();
@@ -77,21 +72,19 @@ public class MemberDao {
 			} finally {}
 		}
 		return result;
+		
 	}
 	
-	//4. 회원탈퇴
-	public int DeleteDo(String userId, String userPw, String email, String userName) {
+	public int DeleteDo(String userId) {
 		int result = 0;
-		
-		System.out.println("ID : " + userId + " | Password : " + userPw + " | email : " + email + " | Name : " + userName);
-		
+
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		String query = "";
 		
 		try {
 			conn = DBConnect.getConnection();
-			query = "delete from where userId=?";
+			query = "delete from member01 where userid=?";
 			pstm = conn.prepareStatement(query);
 			
 			pstm.setString(1, userId);
@@ -105,9 +98,47 @@ public class MemberDao {
 				if(pstm!=null) pstm.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}
+			} finally {}
 		}
 		return result;
+		
 	}
+	
+	public List<MemberDto> SelectDo(){
+		
+		List<MemberDto> userlist = new ArrayList<MemberDto>();
+		
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		String query = "";
+		ResultSet rs = null;
+		
+		try {
+			conn = DBConnect.getConnection();
+			query = "select * from member01";
+			pstm = conn.prepareStatement(query);
+			
+			rs = pstm.executeQuery();
+			
+			if(rs!=null) {
+				while(rs.next()) {
+					userlist.add(new MemberDto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn!=null) conn.close();
+				if(pstm!=null) pstm.close();
+				if(rs!=null) rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {}
+		}
 
+		return userlist;
+		
+	}
+	
 }
