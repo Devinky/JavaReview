@@ -35,6 +35,6 @@
 <fullyQualifiedTypeName name="review.project.commend.MemberUpdate"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="review.project.dto.MemberDto"/>
-<fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="review.project.dao.MemberDao"/>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
 </qualifiedTypeNameHistroy>
