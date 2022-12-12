@@ -12,7 +12,7 @@ import dto.MemberList;
 
 public class MemberDao {
 	
-	public int InsertDo(String userId, String userPw, String userName, String email) {
+	public int InsertDo(String userId, String userPw, String email) {
 		int result = 0;
 		
 		Connection conn = null;
@@ -21,13 +21,12 @@ public class MemberDao {
 		
 		try {
 			conn = DBConnect.getConnection();
-			query = "insert into memberlist1211(userId, userPw, userName, email) values(?,?,?,?)";
+			query = "insert into member12(userId, userPw, email) values(?,?,?)";
 			pstm = conn.prepareStatement(query);
 			
 			pstm.setString(1, userId);
 			pstm.setString(2, userPw);
-			pstm.setString(3, userName);
-			pstm.setString(4, email);
+			pstm.setString(3, email);
 			
 			result = pstm.executeUpdate();
 		} catch (SQLException e) {
@@ -44,7 +43,7 @@ public class MemberDao {
 		return result;
 	}
 	
-	public int UpdateDo(String userId, String userPw, String userName, String email) {
+	public int UpdateDo(String userId, String userPw, String email) {
 		int result = 0;
 		
 		Connection conn = null;
@@ -53,13 +52,12 @@ public class MemberDao {
 		
 		try {
 			conn = DBConnect.getConnection();
-			query = "update memberlist1211 set userPw=?, userName=?, email=? where userId=?";
+			query = "update member12 set userPw=?, userName=?, email=? where userId=?";
 			pstm = conn.prepareStatement(query);
 			
 			pstm.setString(1, userPw);
-			pstm.setString(2, userName);
-			pstm.setString(3, email);
-			pstm.setString(4, userId);
+			pstm.setString(2, email);
+			pstm.setString(3, userId);
 			
 			result = pstm.executeUpdate();
 		} catch (SQLException e) {
@@ -115,7 +113,7 @@ public class MemberDao {
 		
 		try {
 			conn = DBConnect.getConnection();
-			query = "select * from memberList";
+			query = "select * from member12";
 			pstm = conn.prepareStatement(query);
 			rs = pstm.executeQuery();
 			
@@ -124,8 +122,7 @@ public class MemberDao {
 					String userId = rs.getString(1);
 					String userPw = rs.getString(2);
 					String userName = rs.getString(3);
-					String email = rs.getString(4);
-					list.add(new MemberList(userId, userPw, userName, email));
+					list.add(new MemberList(userId, userPw, userName));
 				}
 			}
 		} catch (SQLException e) {
@@ -142,4 +139,7 @@ public class MemberDao {
 		
 		return list;
 	}
+	
+	
+	
 }

@@ -2,23 +2,23 @@ package dto;
 
 public class BoardList {
 	
-	private int bNum;
+	private int no;
 	private String bTitle;
 	private String bContent;
 	private String bId;
 	
-	public BoardList(int bNum, String bTitle, String bContent, String bId) {
+	public BoardList(int no, String bTitle, String bContent, String bId) {
 		super();
-		this.bNum = bNum;
+		this.no = no;
 		this.bTitle = bTitle;
 		this.bContent = bContent;
 		this.bId = bId;
 	}
-	public int getbNum() {
-		return bNum;
+	public int getNo() {
+		return no;
 	}
-	public void setbNum(int bNum) {
-		this.bNum = bNum;
+	public void setNo(int no) {
+		this.no = no;
 	}
 	public String getbTitle() {
 		return bTitle;
