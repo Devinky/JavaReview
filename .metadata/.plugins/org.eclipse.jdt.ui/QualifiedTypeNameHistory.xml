@@ -32,14 +32,17 @@
 <fullyQualifiedTypeName name="review.project.dao.MemberDao"/>
 <fullyQualifiedTypeName name="java.sql.DriverManager"/>
 <fullyQualifiedTypeName name="java.sql.Connection"/>
-<fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
 <fullyQualifiedTypeName name="dbconnect.DBConnect"/>
 <fullyQualifiedTypeName name="java.sql.ResultSet"/>
-<fullyQualifiedTypeName name="dto.MemberList"/>
-<fullyQualifiedTypeName name="commend.ExecuteCommend"/>
 <fullyQualifiedTypeName name="commend.MemberInsert"/>
 <fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="dto.MemberList"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="dao.MemberDao"/>
+<fullyQualifiedTypeName name="commend.MemberUpdate"/>
+<fullyQualifiedTypeName name="commend.MemberSelect"/>
+<fullyQualifiedTypeName name="commend.MemberDelete"/>
+<fullyQualifiedTypeName name="commend.ExecuteCommend"/>
 </qualifiedTypeNameHistroy>
